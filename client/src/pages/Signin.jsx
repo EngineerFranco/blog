@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { signInStart, signInSuccess, signInFailure } from '../user/userSlice';
 import { useDispatch, useSelector } from 'react-redux'
+import OAth from '../components/OAth';
 
 const SignIn = () => {
     const [formData, setFormData] = useState({});
@@ -102,6 +103,7 @@ const SignIn = () => {
                                 ) : <span>Sign In</span>
                             }
                         </Button>
+                        <OAth/>
                     </form>
                     <div className='flex gap-2 text-sm mt-5'>
                         <span>Don`t have an account?</span>

@@ -38,7 +38,7 @@ export const signup = async (req, res, next) => {
     }
 };
 
-export const signin = async (req, res, next) =>{
+export const signin = async (req, res, next) => {
     try {
         const { email, password } = req.body;
         console.log("Sign In Request body: ", req.body)
@@ -81,4 +81,57 @@ export const signin = async (req, res, next) =>{
         next(error)
     }
    
+}
+
+export const google = async (req, res, next) => {
+    try {
+        const {email, username, googlePhotoURL} = req.body
+        const user = await User.findOne({email})
+        if(user){
+            const token = jwt.sign({ id: user._id}, process.env.JWT_SECRET)
+            const {password, ... rest} = user._doc
+
+            const responseData = {
+                data: rest,
+                statusCode: 200,
+                message: 'User successfully sign in using google account',
+                success: true,
+            }
+            res.status(200).cookie('access_token', token, {
+                httpOnly:true
+            }).json(responseData)
+        }else{
+         
+            const generatedPassword = Math.random().toString(36).slice(-8) + Math.random().toString(36).slice(-8)
+            const hashPassword = bcryptjs.hashSync(generatedPassword, 10)
+            const newUser = new User({
+                username: username.toLowerCase().split(' ').join('') + Math.random().toString(9).slice(-4),
+                email,
+                password: hashPassword,
+                profilePicture: googlePhotoURL
+            })
+
+            try {
+                await newUser.save()
+                const token = jwt.sign({ id: user._id}, process.env.JWT_SECRET)
+                const {password, ... rest} = user._doc
+                const responseData = {
+                    data: rest,
+                    statusCode: 200,
+                    message: 'User successfully sign up using google account',
+                    success: true,
+                }
+                res.status(200).cookie('access_token', token, {
+                    httpOnly:true
+                }).json(responseData)
+
+            } catch (error) {
+                console.log(error)
+                next(error)
+            }
+        }
+    } catch (error) {
+        console.log(error)
+        next(error)
+    }
 }
