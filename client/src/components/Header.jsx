@@ -29,7 +29,7 @@ const Header = () => {
             <CiDark className=""/>
           </Button>
           <Link to="/signIn"> 
-          <Button gradientDuoTone="purpleToBlue" className="">
+          <Button gradientDuoTone="purpleToBlue" className="" outline >
             Sign In
           </Button>
           </Link>
