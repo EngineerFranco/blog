@@ -1,18 +1,14 @@
 import User from "../models/userModel.js";
 import bcryptjs from 'bcryptjs';
+import { errorHandler } from "../utils/error.js";
 
-export const signup = async (req, res) => {
+export const signup = async (req, res, next) => {
     try {
         const { username, email, password } = req.body;
         
-        // Validation: Check if any required field is missing
+        // Validations
         if (!username || !email || !password || username === '' || email === '' || password === '') {
-            return res.status(400).json({
-                data: [],
-                message: 'All fields are required',
-                success: false,
-                error: true
-            });
+            next(errorHandler(400, 'All fields are required'))
         }
 
         // Hash the password
@@ -27,27 +23,15 @@ export const signup = async (req, res) => {
         try {
             await newUser.save();
             return res.status(201).json({
-                data: [],
+                statusCode: 201,
                 message: 'User successfully created',
                 success: true,
-                error: false
             });
         } catch (error) {
-            return res.status(502).json({
-                data: [],
-                message: error.message || error,
-                success: false,
-                error: true
-            });
+            next(error)
         }
        
     } catch (error) {
-        // Catch any other unexpected errors and return a response
-        return res.status(500).json({
-            data: [],
-            message: 'Something went wrong',
-            success: false,
-            error: true
-        });
+        next(error)
     }
 };

@@ -11,14 +11,12 @@ app.use(express.json())
 app.get('/test', (req, res)=>{
     try {
         res.status(200).json({
-            data: [],
             message: 'Api is working!',
             success: true,
             error: false
         })
     } catch (error) {
         res.status(error.status).json({
-            data: [],
             message: 'Something went wrong',
             success: false,
             error: true
@@ -29,6 +27,16 @@ app.get('/test', (req, res)=>{
 
 app.use('/api/user', userRouter)
 app.use('/api/auth', authRouter)
+
+app.use((err, req, res, next) =>{
+    const statusCode = err.statusCode || 500
+    const message = err.message || 'Internal Server Error'
+    res.status(statusCode).json({
+        statusCode,
+        message,
+        success: false
+    })
+})
 
 mongoose.connect(process.env.DB_URI).then(
     () => {console.log('Database is connected'),
