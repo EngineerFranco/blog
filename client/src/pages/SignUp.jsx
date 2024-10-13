@@ -18,11 +18,10 @@ const SignUp = () => {
     const handleSubmit = async(e) => {
         e.preventDefault();
         setErrorMessage(null)
-        setLoading(true)
-
         if(!formData.username || !formData.email || !formData.password){
             return setErrorMessage('Please fill out all fields')
         }
+        setLoading(true)
         try {
             const responseData = await fetch('/api/auth/signup',{
                 method: 'POST',
@@ -45,8 +44,8 @@ const SignUp = () => {
 
   return (
     <section className='min-h-[70dvh] bg-white mt-20'>
-        <div className='flex p-3 max-w-3xl mx-auto flex-col md:flex-row md:items-center gap-12'>
-            <div className='flex-1'>
+        <div className='flex p-3 max-w-3xl mx-auto flex-col md:flex-row md:items-start gap-12'>
+            <div className='flex-1 sm:mt-10'>
                 <Link to={"/"} className='text-4xl font-bold dark:text-white'>
                     <span className="px-2 py-1 bg-gradient-to-r from-gray-950 via-gray-700 to-gray-400 rounded-lg text-white">DevFranco</span>
                     Blog
@@ -57,39 +56,36 @@ const SignUp = () => {
             </div>
             <div className='flex-1'>
                 <form 
-                    className="flex max-w-md flex-col gap-4 " 
+                    className="flex max-w-md flex-col gap-4 min-h-[300px]" 
                     onSubmit={handleSubmit}>
                     <div>    
-                        <Label value="Your username" />
+                        <Label value="Username" />
                         <TextInput 
                             id="username" 
                             name = "username"
                             type="text" 
                             placeholder="Username" 
                             onChange={handleChange}
-                            required
                         />
                     </div>
                     <div>    
-                        <Label value="Your email" />
+                        <Label value="Email" />
                         <TextInput 
                             id="email" 
                             name = "email"
                             type="email" 
                             placeholder="Franco@gmail.com" 
                             onChange={handleChange}
-                            required
                         />
                     </div>
                     <div>    
-                        <Label value="Your password" />
+                        <Label value="Password" />
                         <TextInput 
                             id="password"
                             name = 'password'
                             type="password" 
                             placeholder="Password"
                             onChange={handleChange}
-                            required
                         />
                     </div>
                     <Button color='dark' type='submit' disabled={loading}>
@@ -117,9 +113,9 @@ const SignUp = () => {
                         </Alert>
                     )
                 }
+        
             </div>
         </div>
-        
     </section>
   )
 }

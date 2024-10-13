@@ -28,7 +28,7 @@ const Header = () => {
           <Button className="w-12 h-10 rounded-full hidden sm:inline " color="gray">
             <CiDark className=""/>
           </Button>
-          <Link to="/signIn"> 
+          <Link to="/sign-in"> 
           <Button color="dark" className="" outline >
             Sign In
           </Button>
