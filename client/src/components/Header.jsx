@@ -9,8 +9,8 @@ const Header = () => {
   return (
     <header>
       <Navbar className='border-b-2' fluid rounded>
-        <Link to={"/"} className='self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white'>
-          <span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white">DevFranco</span>
+        <Link to={"/"} className='self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white '>
+          <span className="px-2 py-1 bg-gradient-to-r from-gray-950 via-gray-700 to-gray-400 rounded-lg text-white ">DevFranco</span>
           Blog
         </Link>
         <form>
@@ -18,7 +18,7 @@ const Header = () => {
             type="text"
             placeholder="Search..."
             rightIcon={CiSearch}
-            className="hidden lg:inline "
+            className="hidden lg:inline"
           />
         </form>
         <Button className="w-12 h-10 rounded-full lg:hidden" color="gray">
@@ -29,7 +29,7 @@ const Header = () => {
             <CiDark className=""/>
           </Button>
           <Link to="/signIn"> 
-          <Button gradientDuoTone="purpleToBlue" className="" outline >
+          <Button color="dark" className="" outline >
             Sign In
           </Button>
           </Link>

@@ -44,11 +44,11 @@ const SignUp = () => {
     }
 
   return (
-    <section className='min-h-screen bg-white mt-20'>
+    <section className='min-h-[70dvh] bg-white mt-20'>
         <div className='flex p-3 max-w-3xl mx-auto flex-col md:flex-row md:items-center gap-12'>
             <div className='flex-1'>
                 <Link to={"/"} className='text-4xl font-bold dark:text-white'>
-                    <span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white">DevFranco</span>
+                    <span className="px-2 py-1 bg-gradient-to-r from-gray-950 via-gray-700 to-gray-400 rounded-lg text-white">DevFranco</span>
                     Blog
                 </Link>
                 <p className='text-sm mt-5'>
@@ -92,7 +92,7 @@ const SignUp = () => {
                             required
                         />
                     </div>
-                    <Button gradientDuoTone='purpleToPink' type='submit' disabled={loading}>
+                    <Button color='dark' type='submit' disabled={loading}>
                         {
                             loading? (
                                 <>
