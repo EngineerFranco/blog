@@ -1,9 +1,31 @@
 import express from 'express'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
+import userRouter from './routes/userRoutes.js'
 
 dotenv.config()
 const app = express()
+
+app.get('/test', (req, res)=>{
+    try {
+        res.status(200).json({
+            data: [],
+            message: 'Api is working!',
+            success: true,
+            error: false
+        })
+    } catch (error) {
+        res.status(error.status).json({
+            data: [],
+            message: 'Something went wrong',
+            success: false,
+            error: true
+        })
+    }
+   
+})
+
+app.use('/api/user', userRouter)
 
 mongoose.connect(process.env.DB_URI).then(
     () => {console.log('Database is connected'),
@@ -14,6 +36,7 @@ mongoose.connect(process.env.DB_URI).then(
 ).catch(err =>{
     console.log(err)
 })
+
 
 
 
