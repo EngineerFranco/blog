@@ -65,9 +65,6 @@ export const updateUser = async(req, res, next) => {
 }
 
 export const deleteUser = async(req, res, next) => {
-    console.log('test')
-    console.log(req.user.id)
-    console.log(req.params.id)
     if(req.user.id !== req.params.id){
         return next(errorHandler(403, 'You are not allowed to delete this user'))
     }
@@ -81,5 +78,17 @@ export const deleteUser = async(req, res, next) => {
         })
     } catch (error) {
         next(error)
+    }
+}
+
+export const signoutUser = async(req, res, next) =>{
+    try {
+        res.clearCookie('access_token').status(200).json({
+            statusCode: 200,
+            success: true,
+            message: 'User signout successfully'
+        })
+    } catch (error) {
+        next(error) 
     }
 }

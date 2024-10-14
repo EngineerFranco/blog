@@ -1,19 +1,36 @@
 
 import { Avatar, Button, Dropdown, Navbar, TextInput } from "flowbite-react";
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { CiSearch } from "react-icons/ci";
 import { CiDark, CiLight } from "react-icons/ci";
 import { useSelector, useDispatch  } from "react-redux"
 import { toggleTheme } from "../redux/theme/themeSlice";
+import { signOutSuccess } from "../redux/user/userSlice";
 
 const Header = () => {
   const path = useLocation().pathname
   const dispatch = useDispatch()
   const {currentUser} = useSelector(state => state.user)
   const {theme} = useSelector(state=> state.theme)
-  const handleSignOut = () =>{
-    
-  }
+  const navigate = useNavigate()
+
+  const handleSignOut = async()=>{
+    try {
+        const responseData = await fetch(`/api/user/signout`,{
+            method: 'POST'
+        })
+        const responseAPI = await responseData.json()
+        if(!responseAPI){
+            console.log(responseAPI.message)
+        } else{
+            navigate('/sign-in')
+            dispatch(signOutSuccess())
+           
+        }
+    } catch (error) {
+        console.log(error.message)
+    }
+}
 
   return (
     <header>
@@ -60,7 +77,7 @@ const Header = () => {
               </Link>
               <Dropdown.Item>Settings</Dropdown.Item>
               <Dropdown.Divider />
-              <Dropdown.Item onSubmit={handleSignOut}>Sign out</Dropdown.Item>
+              <Dropdown.Item onClick={handleSignOut}>Sign out</Dropdown.Item>
             </Dropdown>
             )
             :
