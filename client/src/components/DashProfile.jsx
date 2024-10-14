@@ -8,9 +8,10 @@ import 'react-circular-progressbar/dist/styles.css';
 import { updateStart, updateSuccess, updateFailure, deleteStart, deleteSuccess, deleteFailure, signOutSuccess } from '../redux/user/userSlice';
 import { useDispatch } from 'react-redux';
 import { HiOutlineExclamationCircle } from "react-icons/hi";
+import { Link } from 'react-router-dom';
 
 const DashProfile = () => {
-    const {currentUser, error} = useSelector(state => state.user)
+    const {currentUser, error, loading} = useSelector(state => state.user)
     const [imageFile, setImageFile] = useState(null);
     const [imageFileURL, setimageFileURL] = useState(null)
     const [imageFileUploadProgress, setImageUploadProgress] = useState(null)
@@ -193,9 +194,19 @@ return (
             <TextInput type='text' id='username' name='username' placeholder='Username' defaultValue={currentUser.username} onChange={handleChange}/>
             <TextInput type='email' id='email' name='email' placeholder='Email' defaultValue={currentUser.email} onChange={handleChange}/>
             <TextInput type='password' id='password'placeholder='Password' name='password' onChange={handleChange}/>
-            <Button type='submit' className='bg-gradient-to-r from-gray-900 via-blue-950 to-gray-600 border border-gray-800' outline>
+            <Button type='submit' className='bg-gradient-to-r from-gray-900 via-blue-950 to-gray-600 border border-gray-800' outline disabled={loading || imageFileUploading}>
                 Update
             </Button>
+            {
+                currentUser?.isAdmin && (
+                    <Link to={'/post-create'}>
+                        <Button type='button' className='w-full bg-gradient-to-r from-gray-900 via-blue-950 to-gray-600 border border-gray-800'>
+                        Create a post
+                        </Button>
+                    </Link>
+                )
+            }
+           
         </form>
         <div className='flex justify-between mt-5 px-1'>
             <span className='cursor-pointer text-red-500' onClick={() => setShowModal(true)}>Delete Account</span>

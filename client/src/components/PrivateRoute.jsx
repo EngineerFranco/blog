@@ -7,6 +7,8 @@ const PrivateRoute = () => {
   return (
      currentUser? <Outlet/> : <Navigate to={'/sign-in'}/>
   )
+
+    
 }
 
 export default PrivateRoute
