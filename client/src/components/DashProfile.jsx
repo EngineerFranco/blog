@@ -193,7 +193,7 @@ return (
             <TextInput type='text' id='username' name='username' placeholder='Username' defaultValue={currentUser.username} onChange={handleChange}/>
             <TextInput type='email' id='email' name='email' placeholder='Email' defaultValue={currentUser.email} onChange={handleChange}/>
             <TextInput type='password' id='password'placeholder='Password' name='password' onChange={handleChange}/>
-            <Button type='submit' className='bg-gradient-to-r from-gray-900 via-blue-950 to-gray-600 border border-gray-800'>
+            <Button type='submit' className='bg-gradient-to-r from-gray-900 via-blue-950 to-gray-600 border border-gray-800' outline>
                 Update
             </Button>
         </form>
