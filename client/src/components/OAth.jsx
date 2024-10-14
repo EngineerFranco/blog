@@ -30,7 +30,7 @@ const OAth = () => {
 
         const responseAPI = await responseData.json()
         if(responseAPI.success){
-            dispatch(signInSuccess(responseAPI))
+            dispatch(signInSuccess(responseAPI.data))
             navigate('/');
         }
 

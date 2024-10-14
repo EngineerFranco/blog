@@ -11,7 +11,6 @@ const Header = () => {
   const dispatch = useDispatch()
   const {currentUser} = useSelector(state => state.user)
   const {theme} = useSelector(state=> state.theme)
-
   const handleSignOut = () =>{
     
   }
@@ -48,13 +47,13 @@ const Header = () => {
               label={
                 <Avatar
                 alt="user"
-                img={currentUser.data.profilePicture}
+                img={currentUser.profilePicture}
                 rounded/>
               }
             >
               <Dropdown.Header>
-                <span className="block text-sm">@{currentUser.data.username}</span>
-                <span className="block truncate text-sm font-medium">{currentUser.data.email}</span>
+                <span className="block text-sm">@{currentUser.username}</span>
+                <span className="block truncate text-sm font-medium">{currentUser.email}</span>
               </Dropdown.Header>
               <Link to={'/dashboard?tab=profile'}>
                 <Dropdown.Item>Profile</Dropdown.Item>
