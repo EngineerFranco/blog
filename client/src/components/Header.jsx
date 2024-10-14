@@ -2,17 +2,25 @@
 import { Avatar, Button, Dropdown, Navbar, TextInput } from "flowbite-react";
 import { Link, useLocation } from 'react-router-dom';
 import { CiSearch } from "react-icons/ci";
-import { CiDark } from "react-icons/ci";
-import { useSelector } from "react-redux"
+import { CiDark, CiLight } from "react-icons/ci";
+import { useSelector, useDispatch  } from "react-redux"
+import { toggleTheme } from "../redux/theme/themeSlice";
 
 const Header = () => {
   const path = useLocation().pathname
+  const dispatch = useDispatch()
   const {currentUser} = useSelector(state => state.user)
+  const {theme} = useSelector(state=> state.theme)
+
+  const handleSignOut = () =>{
+    
+  }
+
   return (
     <header>
       <Navbar className='border-b-2' fluid rounded>
         <Link to={"/"} className='self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white '>
-          <span className="px-2 py-1 bg-gradient-to-r from-gray-950 via-gray-700 to-gray-400 rounded-lg text-white ">DevFranco</span>
+          <span className="px-2 py-1 bg-gradient-to-r from-gray-900 via-blue-950 to-gray-600 rounded-md shadow-xl text-gray-50 ">DevFranco</span>
           Blog
         </Link>
         <form>
@@ -27,8 +35,10 @@ const Header = () => {
           <CiSearch className="mx-auto my-auto"/>
         </Button>
         <div className="flex gap-2 md:order-2">
-          <Button className="w-12 h-10 rounded-full hidden sm:inline " color="gray">
-            <CiDark className=""/>
+          <Button className="w-12 h-10 rounded-full hidden sm:inline " color="gray" onClick={()=>{dispatch(toggleTheme())}}>
+            {
+              theme === 'light' ? <CiLight/> : <CiDark />
+            }
           </Button>
           {
             currentUser?
@@ -51,7 +61,7 @@ const Header = () => {
               </Link>
               <Dropdown.Item>Settings</Dropdown.Item>
               <Dropdown.Divider />
-              <Dropdown.Item>Sign out</Dropdown.Item>
+              <Dropdown.Item onSubmit={handleSignOut}>Sign out</Dropdown.Item>
             </Dropdown>
             )
             :

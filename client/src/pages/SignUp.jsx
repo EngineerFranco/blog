@@ -1,6 +1,7 @@
 import { Alert, Button, Label, Spinner, TextInput } from 'flowbite-react'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { GiArchiveRegister } from "react-icons/gi";
 import OAth from '../components/OAth'
 
 const SignUp = () => {
@@ -44,15 +45,15 @@ const SignUp = () => {
     }
 
   return (
-    <section className='min-h-[70dvh] bg-white mt-20'>
-        <div className='flex p-3 max-w-3xl mx-auto flex-col md:flex-row md:items-start gap-12'>
+    <section className='min-h-screen dark:text-gray-300 mt-16 sm:mt-28'>
+        <div className='flex p-3 max-w-3xl mx-auto flex-col md:flex-row md:items-start gap-20'>
             <div className='flex-1 sm:mt-10'>
                 <Link to={"/"} className='text-4xl font-bold dark:text-white'>
-                    <span className="px-2 py-1 bg-gradient-to-r from-gray-950 via-gray-700 to-gray-400 rounded-lg text-white">DevFranco</span>
+                    <span className="px-2 py-1 bg-gradient-to-r from-gray-900 via-blue-950 to-gray-600 rounded-md shadow-xl text-gray-50">DevFranco</span>
                     Blog
                 </Link>
                 <p className='text-sm mt-5'>
-                    This is DevFranco Blog wep application. You can sign up using your email and password or with Google.
+                    This is DevFranco Blog web application. You can sign up using your email and password or with Google.
                 </p>
             </div>
             <div className='flex-1'>
@@ -97,7 +98,8 @@ const SignUp = () => {
                                  <span className='pl-3'>Loading....</span>
                                 </>
                             ) 
-                            : <span>Sign Up</span>
+                            : <span className='flex items-center'>Sign Up  <GiArchiveRegister className="ml-2 h-4 w-4" /></span>
+                            
                         }
                     </Button>
                     <OAth/>

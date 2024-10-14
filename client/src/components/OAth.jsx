@@ -3,7 +3,7 @@ import { FcGoogle } from "react-icons/fc";
 import { GoogleAuthProvider, signInWithPopup, getAuth } from 'firebase/auth'
 import { app } from "../firebase";
 import { useDispatch } from "react-redux";
-import { signInSuccess } from "../user/userSlice";
+import { signInSuccess } from "../redux/user/userSlice";
 import { useNavigate } from "react-router-dom";
 
 const OAth = () => {
@@ -41,10 +41,10 @@ const OAth = () => {
     
 
   return (
-    <Button className="bg-gradient-to-r from-red-600 via-yellow-500 to-blue-600"  type="button" outline 
+    <Button className=""  type="button" gradientMonochrome='teal' outline
         onClick={handeGoogleClick}>
           <FcGoogle className="my-auto mr-2 text-lg"/>
-        <p className="">Continue with Google</p>
+        <p className="dark:text-gray-200">Continue with Google</p>
        
     </Button>
   )
