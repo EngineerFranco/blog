@@ -108,6 +108,11 @@ const DashProfile = () => {
         }
     }
 
+    const handleDelete = async() =>{
+        console.log('Deleting user')
+        
+    }
+
 
 
 return (
@@ -160,7 +165,7 @@ return (
             </Button>
         </form>
         <div className='flex justify-between mt-5 px-1'>
-            <span className='cursor-pointer text-red-500'>Delete Account</span>
+            <span className='cursor-pointer text-red-500' onClick={handleDelete}>Delete Account</span>
             <span className='cursor-pointer'>Signout</span>
         </div>
         <div>
