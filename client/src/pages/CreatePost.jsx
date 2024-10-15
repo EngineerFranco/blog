@@ -29,7 +29,6 @@ const CreatePost = () => {
             <ReactQuill theme="snow" value={value} onChange={setValue} placeholder='Write something' className='h-[18rem] mb-[3rem] ' required/>
             <Button type='submit' className='hover:scale-105 transition ease-in-out bg-gradient-to-r sm:py-1 py-0 from-gray-900 via-blue-950 to-gray-600 border border-gray-800 w-[20rem] mx-auto'>Submit</Button>
             </div>
-            
         </form>
     </section>
   )
