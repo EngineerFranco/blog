@@ -3,18 +3,17 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
-import { MdDelete } from "react-icons/md";
-import { MdEditSquare } from "react-icons/md";
+import { MdDelete, MdEditSquare } from 'react-icons/md';
 
 const DashPost = () => {
   const { currentUser } = useSelector((state) => state.user);
   const [userPosts, setUserPosts] = useState([]);
-  const [showMore, setShowMore] = useState(true);
+  const [showMore, setShowMore] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [postIdToDelete, setPostIdToDelete] = useState('');
   
   useEffect(() => {
-    const fetchposts = async () => {
+    const fetchPosts = async () => {
       try {
         const responseData = await fetch(`/api/post/view?userId=${currentUser._id}`);
         const responseAPI = await responseData.json();
@@ -25,7 +24,7 @@ const DashPost = () => {
     };
     
     if (currentUser?.isAdmin) {
-      fetchposts();
+      fetchPosts();
     }
   }, [currentUser?._id]);
 
@@ -38,8 +37,8 @@ const DashPost = () => {
       const responseAPI = await responseData.json();
       if (responseAPI.success) {
         setUserPosts((prev) => [...prev, ...responseAPI.data.posts]);
-        if (responseAPI.data.posts.length < 9) {
-          setShowMore(false);
+        if (responseAPI.data.posts.length <= 9) {
+          setShowMore(false); 
         }
       }
     } catch (error) {
@@ -51,18 +50,18 @@ const DashPost = () => {
     setShowModal(false);
     try {
       const responseData = await fetch(
-        `/api/post/deletepost/${postIdToDelete}/${currentUser._id}`,
+        `/api/post/delete/${postIdToDelete}/${currentUser._id}`,
         {
           method: 'DELETE',
         }
       );
       const responseAPI = await responseData.json();
-      if (!responseData.ok) {
-        console.log(responseAPI.message);
-      } else {
+      if (responseAPI.success) {
         setUserPosts((prev) =>
           prev.filter((post) => post._id !== postIdToDelete)
         );
+      } else {
+        console.log(responseAPI.message);
       }
     } catch (error) {
       console.log(error.message);
@@ -71,7 +70,7 @@ const DashPost = () => {
 
   return (
     <div className='table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500'>
-      {currentUser.isAdmin && userPosts.length > 0 ? (
+      {currentUser?.isAdmin && userPosts.length > 0 ? (
         <>
           <Table hoverable className='shadow-md'>
             <Table.Head className='text-center'>
@@ -79,12 +78,8 @@ const DashPost = () => {
               <Table.HeadCell>Post image</Table.HeadCell>
               <Table.HeadCell>Post title</Table.HeadCell>
               <Table.HeadCell>Category</Table.HeadCell>
-              <Table.HeadCell>
-                <span>Delete</span>
-              </Table.HeadCell>
-              <Table.HeadCell>
-                <span>Edit</span>
-              </Table.HeadCell>
+              <Table.HeadCell>Delete</Table.HeadCell>
+              <Table.HeadCell>Edit</Table.HeadCell>
             </Table.Head>
             <Table.Body className='divide-y'>
               {userPosts.map((post) => (
@@ -102,10 +97,7 @@ const DashPost = () => {
                     </Link>
                   </Table.Cell>
                   <Table.Cell>
-                    <Link
-                      className='font-medium text-gray-900 dark:text-white'
-                      to={`/post/${post.slug}`}
-                    >
+                    <Link className='font-medium text-gray-900 dark:text-white' to={`/post/${post.slug}`}>
                       {post.title}
                     </Link>
                   </Table.Cell>
@@ -121,7 +113,6 @@ const DashPost = () => {
                       Delete
                       <MdDelete className='w-5 h-5'/>
                     </span>
-                    
                   </Table.Cell>
                   <Table.Cell>
                     <Link
