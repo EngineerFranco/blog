@@ -1,14 +1,15 @@
 import {Alert, Button, FileInput, Select, TextInput } from 'flowbite-react'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage'
 import { app } from '../firebase'
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-import {useNavigate} from 'react-router-dom'
+import {useNavigate, useParams} from 'react-router-dom'
+import {useSelector} from 'react-redux'
 
-const CreatePost = () => {
+const UpdatePost = () => {
     
     const [file, setFile] = useState(null)
     const [imageFileUploadProgress, setImageUploadProgress] = useState(null)
@@ -16,7 +17,33 @@ const CreatePost = () => {
     const [formData, setFormData] = useState({});
     const [publishError, setPublishError] = useState(null);
     const [publishSuccess, setPublishSuccess] = useState(false)
+    const {postId} = useParams()
     const navigate = useNavigate()
+    const {currentUser} = useSelector(state => state.user)
+    
+
+    useEffect(()=>{
+        try {
+           const fetchPost = async () =>{
+            const responseData = await fetch(`/api/post/view?postId=${postId}`)
+            const responseAPI = await responseData.json()
+
+            if(!responseAPI.success){
+                console.log(responseAPI.message)
+                setPublishSuccess(responseAPI.message)
+                return
+            }
+            if(responseAPI.success){
+                setFormData(responseAPI.data.posts[0])
+                setPublishSuccess(null)
+            }
+           }
+        fetchPost()
+        } catch (error) {
+            console.log(error)
+        }
+    }, [postId])
+
 
     const handleUploadImage = async() =>{
         
@@ -41,11 +68,10 @@ const CreatePost = () => {
                     setImageUploadProgress(null)
                 },
                 () => {
-                    console.log('firebase success')
                     getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) =>{
                         setImageUploadProgress(null)
                         setImageFileUploadError(null)
-                        setFormData({...formData, image:downloadURL})
+                        setFormData({...formData, image:downloadURL    })
                         
                     })
                 }
@@ -59,12 +85,11 @@ const CreatePost = () => {
         }
     }
 
-
     const handleSubmit = async(e) =>{
         e.preventDefault()
         try {
-            const responseData = await fetch('/api/post/create',{
-                method: 'POST',
+            const responseData = await fetch(`/api/post/update/${formData._id}/${currentUser._id}`,{
+                method: 'PUT',
                 headers: {
                     'Content-Type' : ' application/json'
                 },
@@ -73,7 +98,7 @@ const CreatePost = () => {
 
             const responseAPI = await responseData.json()
             if(!responseAPI.success){
-                console.log(responseAPI.message)
+                console.log("api failed",responseAPI.message)
                 setPublishError(responseAPI.message)
                 setPublishSuccess(false)
             }else{
@@ -91,10 +116,10 @@ const CreatePost = () => {
 
   return (
     <section className="min-h-screen p-3 max-w-4xl mx-auto  ">
-        <h1 className="text-center text-3xl font-medium my-8">Create a post</h1>
+        <h1 className="text-center text-3xl font-medium my-8">Update</h1>
         <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
             <div className="w-full flex gap-4 justify-between items-center">
-                <TextInput className='w-full flex-1' type='text' placeholder='Title' required id='title' onChange={(e)=> setFormData({...formData, title: e.target.value})}>
+                <TextInput value={formData.title} className='w-full flex-1' type='text' placeholder='Title' required id='title' onChange={(e)=> setFormData({...formData, title: e.target.value})}>
                 </TextInput>
                 <Select className='' onChange={(e)=> setFormData({...formData, category: e.target.value})}>
                     <option className='' value='uncatgerized'>Select a category</option>
@@ -127,7 +152,7 @@ const CreatePost = () => {
 
             
             <div className='flex-col justify-center items-center h-[24rem]'>
-                <ReactQuill theme="snow" onChange={(value)=>setFormData({...formData, content:value})} placeholder='Write something' className='h-[18rem] mb-[3rem] ' required/>
+                <ReactQuill value={formData.content} theme="snow" onChange={(value)=>setFormData({...formData, content:value})} placeholder='Write something' className='h-[18rem] mb-[3rem] ' required/>
                 <Button  type='submit' className='hover:scale-105 transition ease-in-out bg-gradient-to-r sm:py-1 py-0 from-gray-900 via-blue-950 to-gray-600 border border-gray-800 w-[20rem] mx-auto'>Submit</Button>
             </div>
             {
@@ -142,4 +167,4 @@ const CreatePost = () => {
   )
 }
 
-export default CreatePost
+export default UpdatePost
