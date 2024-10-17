@@ -4,6 +4,9 @@ import { HiArrowSmRight, HiUser  } from "react-icons/hi";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { signOutSuccess } from '../redux/user/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { HiDocumentDuplicate } from "react-icons/hi";
+import { FaComments } from "react-icons/fa";
+import { FaUsers } from "react-icons/fa";
 
 const DashSidebar = () => {
   
@@ -13,7 +16,6 @@ const DashSidebar = () => {
     const dispatch = useDispatch()
     const location = useLocation()
     const {currentUser} = useSelector(state => state.user)
-    console.log(currentUser.isAdmin)
     useEffect(()=>{
         const urlParams = new URLSearchParams(location.search)
         const tabFromUrl = urlParams.get('tab')
@@ -44,12 +46,37 @@ const DashSidebar = () => {
   return (
     <Sidebar aria-label="Sidebar with content separator example" className='w-full md:w-56'>
       <Sidebar.Items>
-        <Sidebar.ItemGroup>
-            <Link to={'/dashboard?tab=profile'}>
+        <Sidebar.ItemGroup className='flex flex-col sm:gap-2 gap-0'>
+            <Link to={'/dashboard?tab=profile'} >
                 <Sidebar.Item active={tab === 'profile'} icon={HiUser} label={currentUser?.isAdmin === true ? "Admin":"User"} labelColor='dark' as='div'>
                 Profile
                 </Sidebar.Item>
             </Link>
+            {
+                currentUser.isAdmin && 
+                <Link to={`/dashboard?tab=comments`}>
+                    <Sidebar.Item  icon={FaComments} as='div' active={tab === 'comments'}>
+                    Comments
+                    </Sidebar.Item>
+                </Link>    
+            }
+            {
+                currentUser.isAdmin &&
+                <Link to={`/dashboard?tab=users`}>
+                    <Sidebar.Item  icon={FaUsers} as='div' active={tab === 'users'}>
+                    Users
+                    </Sidebar.Item>
+                </Link>
+            }
+            {
+                currentUser.isAdmin &&
+                <Link to={`/dashboard?tab=posts`}>
+                    <Sidebar.Item  icon={HiDocumentDuplicate} as='div' active={tab === 'posts'}>
+                    Posts
+                    </Sidebar.Item>
+                </Link>
+            }
+
             <Sidebar.Item icon={HiArrowSmRight} onClick={handleSignOut} >
                 Sign out
             </Sidebar.Item>
