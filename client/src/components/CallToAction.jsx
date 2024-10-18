@@ -3,7 +3,7 @@ import { Button } from "flowbite-react"
 
 const CallToAction = () => {
     return (
-        <div className="flex flex-col sm:flex-row items-center justify-center p-4 rounded-t-3xl mt-8 border border-teal-300/60">
+        <div className="flex flex-col sm:flex-row items-center justify-center p-4 rounded-t-3xl mt-20 border border-teal-300/60">
             <div className="flex flex-col sm:flex-row items-center p-5 h-[15rem] gap-4 sm:gap-2">
                 <div className="flex flex-col text-center sm:text-left">
                     <h2 className="text-4xl font-bold">Hello World!</h2>
