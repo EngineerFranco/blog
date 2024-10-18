@@ -53,7 +53,7 @@ const DashUsers = () => {
       
       if (responseAPI.success) {
         setUsers((prev) => [...prev, ...responseAPI.data.users]);
-        if (responseAPI.data.totalUsers.length <= 9) {
+        if (responseAPI.data.users.length <= 9) {
           setShowMore(false); 
         }
       }
@@ -128,7 +128,7 @@ const DashUsers = () => {
                       {user.email}
                   </Table.Cell>
                   <Table.Cell >
-                    <div className='flex justify-center items-center gap-2 text-gray-900 dark:text-gray-100 gap-1'>
+                    <div className='flex justify-center items-center  text-gray-900 dark:text-gray-100 gap-1'>
                     {user.isAdmin ? (
                       <>
                         Admin <GrUserAdmin />
@@ -167,11 +167,8 @@ const DashUsers = () => {
             </Table.Body>
           </Table>
           {showMore && (
-            <button
-              onClick={handleShowMore}
-              className='w-full text-teal-500 self-center text-sm py-7'
-            >
-              {showMore? `Show more` : `Show less`}
+            <button onClick={handleShowMore} className='w-full text-teal-500 self-center text-sm py-7'>
+              {showMore ? 'Show more' : 'Show less'}
             </button>
           )}
         </>

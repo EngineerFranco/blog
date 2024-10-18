@@ -76,7 +76,6 @@ export const viewPosts = async(req, res, next) =>{
                 lastMonthPosts
             },
         })
-        
     } catch (error) {
         console.log(error.message || error)
         next(error)
