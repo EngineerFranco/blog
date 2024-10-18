@@ -2,6 +2,7 @@ import { useEffect, useState  } from "react"
 import { Link, useParams } from "react-router-dom"
 import DotLoader from "react-spinners/DotLoader";
 import {Button} from 'flowbite-react'
+import CallToAction from "../components/CallToAction";
 
 
 
@@ -90,7 +91,9 @@ const PostPage = () => {
             </div>
 
             <div  className="p-3 mx-auto max-w-6xl my-7 sm:text-base text-sm" dangerouslySetInnerHTML={{__html: post && post.content}}/>
-           
+            <div className="max-w-6xl">
+                <CallToAction/>
+            </div>
                 
         
             
