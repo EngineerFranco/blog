@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom"
 import DotLoader from "react-spinners/DotLoader";
 import {Button} from 'flowbite-react'
 import CallToAction from "../components/CallToAction";
+import CommentSection from "../components/CommentSection";
 
 
 
@@ -78,7 +79,7 @@ const PostPage = () => {
     return (
         <main className="max-w-7xl h-full flex flex-col mx-auto items-center p-3 ">
 
-            <h1 className="sm:text-3xl text-xl font-medium mt-8 ">{post.title}</h1>
+            <h1 className="sm:text-3xl text-xl font-medium mt-8 text-teal-300 font-serif text-shadow-lg " >{post.title}</h1>
             <Link to={`/search?category=${post && post.category}`} className="self-end mt-5 p-3 -mb-5">
                 <Button size="xs" color="gray" pill className="ml-auto">{post.category}</Button>
             </Link>
@@ -94,6 +95,9 @@ const PostPage = () => {
             <div className="max-w-5xl">
                 <CallToAction/>
             </div>
+           
+            <CommentSection postId={post._id}/>
+           
                 
         
             

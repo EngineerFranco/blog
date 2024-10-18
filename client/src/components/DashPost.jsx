@@ -86,7 +86,7 @@ const DashPost = () => {
                   <Table.Cell className='text-center'>{new Date(post.updatedAt).toLocaleDateString()}</Table.Cell>
                   <Table.Cell className='text-center'>
                     <Link to={`/post/${post.slug}`}>
-                      <img src={post.image} alt={post.title} className='w-20 h-15 object-cover bg-gray-500 mx-auto' />
+                      <img src={post.image} alt={post.title} className='w-20 h-10 rounded-sm object-cover bg-gray-500 mx-auto' />
                     </Link>
                   </Table.Cell>
                   <Table.Cell className='text-center'>
