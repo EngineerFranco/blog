@@ -76,7 +76,7 @@ const PostPage = () => {
 
 
     return (
-        <main className="max-w-7xl h-full flex flex-col mx-auto items-center p-3">
+        <main className="max-w-7xl h-full flex flex-col mx-auto items-center p-3 ">
 
             <h1 className="sm:text-3xl text-xl font-medium mt-8 ">{post.title}</h1>
             <Link to={`/search?category=${post && post.category}`} className="self-end mt-5 p-3 -mb-5">
@@ -91,7 +91,7 @@ const PostPage = () => {
             </div>
 
             <div  className="p-3 mx-auto max-w-6xl my-7 sm:text-base text-sm" dangerouslySetInnerHTML={{__html: post && post.content}}/>
-            <div className="max-w-6xl">
+            <div className="max-w-5xl">
                 <CallToAction/>
             </div>
                 
