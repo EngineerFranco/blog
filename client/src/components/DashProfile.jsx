@@ -200,7 +200,7 @@ return (
             {
                 currentUser?.isAdmin && (
                     <Link to={'/post-create'}>
-                        <Button type='button' className='w-full bg-gradient-to-r from-gray-900 via-blue-950 to-gray-600 border border-gray-800'>
+                        <Button type='button' className='w-full bg-gradient-to-r from-gray-900 via-blue-950 to-gray-600 border border-gray-800  '>
                         Create a post
                         </Button>
                     </Link>

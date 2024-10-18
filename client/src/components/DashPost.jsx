@@ -72,7 +72,7 @@ const DashPost = () => {
     <div className='table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500'>
       {currentUser?.isAdmin && userPosts.length > 0 ? (
         <>
-          <Table hoverable className='shadow-md'>
+          <Table hoverable className='shadow-md md:table-fixed'>
             <Table.Head className='text-center'>
               <Table.HeadCell>Date updated</Table.HeadCell>
               <Table.HeadCell>Post image</Table.HeadCell>
@@ -84,10 +84,10 @@ const DashPost = () => {
             <Table.Body className='divide-y'>
               {userPosts.map((post) => (
                 <Table.Row key={post._id} className='bg-white dark:border-gray-700 dark:bg-gray-800'>
-                  <Table.Cell>
+                  <Table.Cell className='text-center'> 
                     {new Date(post.updatedAt).toLocaleDateString()}
                   </Table.Cell>
-                  <Table.Cell>
+                  <Table.Cell className='text-center'>
                     <Link to={`/post/${post.slug}`}>
                       <img
                         src={post.image}
@@ -96,27 +96,27 @@ const DashPost = () => {
                       />
                     </Link>
                   </Table.Cell>
-                  <Table.Cell>
-                    <Link className='font-medium text-gray-900 dark:text-white' to={`/post/${post.slug}`}>
+                  <Table.Cell className='text-center'>
+                    <Link className='font-medium text-gray-900 dark:text-white md:text-wrap text-nowrap' to={`/post/${post.slug}`}>
                       {post.title}
                     </Link>
                   </Table.Cell>
-                  <Table.Cell>{post.category}</Table.Cell>
-                  <Table.Cell className=''>
+                  <Table.Cell className='text-center'>{post.category}</Table.Cell>
+                  <Table.Cell className='text-center'>
                     <span 
                       onClick={() => {
                         setShowModal(true);
                         setPostIdToDelete(post._id);
                       }}
-                      className='font-medium text-red-400 hover:text-red-500 cursor-pointer flex justify-between items-center'
+                      className='font-medium text-red-400 hover:text-red-500 cursor-pointer flex justify-center gap-1 items-center hover:underline'
                     >
                       Delete
                       <MdDelete className='w-5 h-5'/>
                     </span>
                   </Table.Cell>
-                  <Table.Cell>
+                  <Table.Cell className='text-center'>
                     <Link
-                      className='text-teal-500 hover:underline flex justify-between items-center'
+                      className='text-teal-500 hover:text-teal-600  hover:underline flex justify-center gap-1 items-center'
                       to={`/post-update/${post._id}`}
                     >
                       <span>Edit</span>

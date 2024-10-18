@@ -9,10 +9,10 @@ import { signOutSuccess } from "../redux/user/userSlice";
 
 const Header = () => {
   const path = useLocation().pathname
-  const dispatch = useDispatch()
   const {currentUser} = useSelector(state => state.user)
   const {theme} = useSelector(state=> state.theme)
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const handleSignOut = async()=>{
     try {
