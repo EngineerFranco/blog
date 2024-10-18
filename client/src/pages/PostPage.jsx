@@ -4,6 +4,7 @@ import DotLoader from "react-spinners/DotLoader";
 import {Button} from 'flowbite-react'
 import CallToAction from "../components/CallToAction";
 import CommentSection from "../components/CommentSection";
+import PostCard from "../components/PostCard";
 
 
 
@@ -15,8 +16,8 @@ const PostPage = () => {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
     const [post, setPost] = useState(null)
-    
-    
+    const [recentPosts, setRecentPosts] = useState(null)
+
     useEffect(()=>{
         const fetchPost = async()=>{
             try {
@@ -44,6 +45,23 @@ const PostPage = () => {
         }
         fetchPost()
     },[postSlug])
+
+    useEffect(()=>{
+        try {
+            const fetcRecentPosts = async() =>{
+                const res = await fetch (`/api/post/view?limit=3`)
+                const data = await res.json()
+                
+                if(data.success){
+                    console.log(data.data.posts)
+                    setRecentPosts(data.data.posts)
+                }
+            }
+            fetcRecentPosts()
+        } catch (error) {
+            console.log(error)
+        }
+    }, [])
 
     if(loading){
         return (
@@ -97,7 +115,19 @@ const PostPage = () => {
             </div>
            
             <CommentSection postId={post._id}/>
-           
+
+            <div className="flex flex-col justify-center items-center mb-5">
+                <h1 className="text-xl mt-5 mb-5">Recent posts</h1>
+                <div className="flex flex-wrap gap-5 justify-center">
+                    {recentPosts ? 
+                        recentPosts.map((post) => (
+                        <PostCard key={post._id} post={post} />
+                        )) : (
+                        <h1 className="text-sm mx-auto font-semibold">No recent posts yet</h1>
+                        )
+                    }
+                </div>
+            </div>
                 
         
             
