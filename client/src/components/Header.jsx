@@ -6,6 +6,7 @@ import { CiDark, CiLight } from "react-icons/ci";
 import { useSelector, useDispatch  } from "react-redux"
 import { toggleTheme } from "../redux/theme/themeSlice";
 import { signOutSuccess } from "../redux/user/userSlice";
+import { useEffect, useState } from "react";
 
 const Header = () => {
   const path = useLocation().pathname
@@ -13,6 +14,16 @@ const Header = () => {
   const {theme} = useSelector(state=> state.theme)
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const [searchTerm, setSearchTerm] = useState('');
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(location.search);
+    const searchTermFromUrl = urlParams.get('searchTerm');
+    if (searchTermFromUrl) {
+      setSearchTerm(searchTermFromUrl);
+    }
+  }, [location.search]);
+
 
   const handleSignOut = async()=>{
     try {
@@ -32,6 +43,14 @@ const Header = () => {
     }
 }
 
+const handeSubmit = (e)=>{
+  e.preventDefault()
+  const urlParams = new URLSearchParams(location.search)
+  urlParams.set('searchTerm', searchTerm)
+  const searchQuery = urlParams.toString()
+  navigate(`search?/${searchQuery}`)
+}
+
   return (
     <header>
       <Navbar className='border-b-2' fluid rounded>
@@ -39,12 +58,14 @@ const Header = () => {
           <span className="px-2 py-1 bg-gradient-to-r from-gray-900 via-blue-950 to-gray-600 rounded-md shadow-xl text-gray-50 ">DevFranco</span>
           Blog
         </Link>
-        <form>
+        <form onSubmit={handeSubmit}>
           <TextInput
             type="text"
             placeholder="Search..."
             rightIcon={CiSearch}
             className="hidden lg:inline"
+            value={searchTerm}
+            onChange={(e)=>setSearchTerm(e.target.value)}
           />
         </form>
         <Button className="w-12 h-10 rounded-full lg:hidden" color="gray">

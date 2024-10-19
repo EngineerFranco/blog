@@ -13,6 +13,7 @@ import CreatePost from './pages/CreatePost';
 import UpdatePost from './pages/UpdatePost';
 import PostPage from './pages/PostPage';
 import ScrollToTop from './components/ScrollToTop';
+import Search from './pages/Search';
 
 const App = () => {
   return (
@@ -25,6 +26,8 @@ const App = () => {
         <Route path='/about' element={<About />} />
         <Route path='/sign-up' element={<SignUp />} />
         <Route path='/sign-in' element={<Signin />} />
+        <Route path='/search' element={<Search />} />
+
         
         
         {/* Private routes */}
@@ -40,6 +43,10 @@ const App = () => {
 
         <Route path='/projects' element={<Projects />}/>
         <Route path='/post/:postSlug' element={<PostPage />}/>
+
+
+        {/* Catch-all route for 404 */}
+        <Route path="*" element={<div>404 Not Found</div>} />
 
       </Routes>
       <FooterComponent />
