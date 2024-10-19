@@ -36,12 +36,10 @@ const CreatePost = () => {
                     setImageUploadProgress(progress.toFixed(0));
                 },
                 (error) => {
-                    console.log(error.message|| error)
                     setImageFileUploadError('Image upload failed')
                     setImageUploadProgress(null)
                 },
                 () => {
-                    console.log('firebase success')
                     getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) =>{
                         setImageUploadProgress(null)
                         setImageFileUploadError(null)
@@ -52,7 +50,6 @@ const CreatePost = () => {
 
             )
         } catch (error) {
-            console.log("error uploading image: ", error)
             setImageFileUploadError(null)
             setImageFileUploadError(error.message || error)
 
@@ -73,11 +70,9 @@ const CreatePost = () => {
 
             const responseAPI = await responseData.json()
             if(!responseAPI.success){
-                console.log(responseAPI.message)
                 setPublishError(responseAPI.message)
                 setPublishSuccess(false)
             }else{
-                console.log(responseAPI.message)
                 setPublishSuccess(true)
                 setPublishError(null)
                 navigate(`/post/${responseAPI.data.slug}`)

@@ -37,7 +37,6 @@ export const viewComment = async(req, res, next) => {
             return next(errorHandler(400,'Invalid Post Id'))
         }
         const comments = await Comment.find({postId:postId}).sort({createdAt: -1,})
-        console.log('test')
         res.status(200).json({
             statusCode: 200,
             success: true,
@@ -46,7 +45,7 @@ export const viewComment = async(req, res, next) => {
         })
 
     } catch (error) {
-        console.log(error)
+  
         next(error)
     }
 }

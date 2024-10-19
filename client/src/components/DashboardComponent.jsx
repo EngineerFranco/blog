@@ -56,7 +56,6 @@ const DashboardComponent = () => {
                 const res = await fetch(`/api/comment/getcomments?limit=5`)
                 const resData = await res.json()
                 if(resData){
-                    console.log(resData)
                     setComments(resData.comments)
                     setTotalComments(resData.totalComments)
                     setLastMonthComments(resData.lastMonthComments)

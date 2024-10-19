@@ -63,7 +63,6 @@ const UpdatePost = () => {
                     setImageUploadProgress(progress.toFixed(0));
                 },
                 (error) => {
-                    console.log(error.message|| error)
                     setImageFileUploadError('Image upload failed')
                     setImageUploadProgress(null)
                 },
@@ -78,7 +77,6 @@ const UpdatePost = () => {
 
             )
         } catch (error) {
-            console.log("error uploading image: ", error)
             setImageFileUploadError(null)
             setImageFileUploadError(error.message || error)
 
@@ -98,17 +96,14 @@ const UpdatePost = () => {
 
             const responseAPI = await responseData.json()
             if(!responseAPI.success){
-                console.log("api failed",responseAPI.message)
                 setPublishError(responseAPI.message)
                 setPublishSuccess(false)
             }else{
-                console.log(responseAPI.message)
                 setPublishSuccess(true)
                 setPublishError(null)
                 navigate(`/post/${responseAPI.data.slug}`)
             }
         } catch (error) {
-            console.log(error)
             setPublishSuccess(false)
             setPublishError('Something went wrong')
         }

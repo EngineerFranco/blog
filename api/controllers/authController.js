@@ -7,8 +7,6 @@ export const signup = async (req, res, next) => {
     try {
         const { username, email, password } = req.body;
 
-        console.log("Sign Up Request body: ", req.body)
-
         // Validations
         if (!username || !email || !password || username === '' || email === '' || password === '') {
             return next(errorHandler(400, 'All fields are required'))
@@ -41,7 +39,6 @@ export const signup = async (req, res, next) => {
 export const signin = async (req, res, next) => {
     try {
         const { email, password } = req.body;
-        console.log("Sign In Request body: ", req.body)
 
         // Validations
         if (!email || !password || email === '' || password === '') {
@@ -126,12 +123,10 @@ export const google = async (req, res, next) => {
                 }).json(responseData)
 
             } catch (error) {
-                console.log(error)
                 next(error)
             }
         }
     } catch (error) {
-        console.log(error)
         next(error)
     }
 }

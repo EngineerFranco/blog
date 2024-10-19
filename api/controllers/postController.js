@@ -77,7 +77,6 @@ export const viewPosts = async(req, res, next) =>{
             },
         })
     } catch (error) {
-        console.log(error.message || error)
         next(error)
     }
 }

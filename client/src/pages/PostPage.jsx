@@ -30,7 +30,6 @@ const PostPage = () => {
                     setLoading(false)
                 }
                 if(responseAPI.success){
-                    console.log(responseAPI.message)
                     setError(false)
                     setLoading(false)
                     setPost(responseAPI.data.posts[0])
@@ -53,7 +52,6 @@ const PostPage = () => {
                 const data = await res.json()
                 
                 if(data.success){
-                    console.log(data.data.posts)
                     setRecentPosts(data.data.posts)
                 }
             }

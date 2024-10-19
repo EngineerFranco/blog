@@ -36,14 +36,11 @@ export default function Search() {
       const searchQuery = urlParams.toString();
       const res = await fetch(`/api/post/view?${searchQuery}`);
       if (!res.ok) {
-        console.log('fetch not ok')
         setLoading(false);
         return;
       }
       if (res.ok) {
-        console.log('fetch ok')
         const data = await res.json();
-        console.log('data.data', data.data)
         setPosts(data.data.posts);
         setLoading(false);
         if (data.data.posts.length === 9) {
@@ -78,7 +75,6 @@ export default function Search() {
     urlParams.set('sort', sidebarData.sort);
     urlParams.set('category', sidebarData.category);
     const searchQuery = urlParams.toString();
-    console.log("searchQuery", searchQuery)
     navigate(`/search?${searchQuery}`);
   };
 

@@ -18,14 +18,12 @@ const DashUsers = () => {
   const [deleteMessage, setDeleteMessage] = useState(null)
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  console.log("users: ", users)
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
         const responseData = await fetch(`/api/user/view`);
         const responseAPI = await responseData.json();
-        console.log("total users", responseAPI.data.totalUsers)
         setUsers(responseAPI.data.users);
         if(responseAPI.data.totalUsers > 9){
           setShowMore(true)
@@ -63,7 +61,6 @@ const DashUsers = () => {
   };
 
   const handleDeleteUser = async () => {
-    console.log("currentUser to be deleted: ", userIdToDelete)
 
     try {
       const responseData = await fetch(

@@ -112,7 +112,6 @@ const DashProfile = () => {
     }
 
     const handleDeleteUser = async()=>{
-        console.log('deleting')
         try {
             dispatch(deleteStart)
             const responseData = await fetch(`/api/user/delete/${currentUser._id}`,{

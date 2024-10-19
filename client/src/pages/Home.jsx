@@ -6,7 +6,7 @@ import DotLoader from "react-spinners/DotLoader";
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true); // Set loading to true initially
+  const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -19,7 +19,7 @@ const Home = () => {
       } catch (error) {
         console.error("Error fetching posts:", error);
       } finally {
-        setLoading(false); // Set loading to false in finally block to ensure it executes after the fetch
+        setLoading(false); 
       }
     };
     fetchPosts();
