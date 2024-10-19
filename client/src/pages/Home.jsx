@@ -23,7 +23,7 @@ const Home = () => {
           <h1 className="text-3xl font-bold lg:text-6xl">Welcome to my Blog</h1>
           <p className="text-gray-600 text-sm sm:text-lg">Welcome! I'm Franco Santos, a full-stack developer.
           This personal blog serves as a space for my development practice. You're welcome to browse, read, and even contribute by creating your own posts. Enjoy exploring!</p>
-          <Link to={'/search'} className='text-xs sm:text-sm hover:underline text-teal-500 font-semibold'>
+          <Link to={'/search'} className='text-xs sm:text-sm hover:underline text-teal-400 font-semibold'>
           View all posts
         </Link>
         </div>
