@@ -116,6 +116,7 @@ export const editComment = async (req, res, next) => {
   };
 
   export const getcomments = async (req, res, next) => {
+    
     if (!req.user.isAdmin)
       return next(errorHandler(403, 'You are not allowed to get all comments'));
     try {
@@ -136,6 +137,7 @@ export const editComment = async (req, res, next) => {
       const lastMonthComments = await Comment.countDocuments({
         createdAt: { $gte: oneMonthAgo },
       });
+  
       res.status(200).json({ comments, totalComments, lastMonthComments });
     } catch (error) {
       next(error);

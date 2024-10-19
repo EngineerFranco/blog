@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { HiDocumentDuplicate } from "react-icons/hi";
 import { FaComments } from "react-icons/fa";
 import { FaUsers } from "react-icons/fa";
+import { MdSpaceDashboard } from "react-icons/md";
 
 const DashSidebar = () => {
   
@@ -47,6 +48,14 @@ const DashSidebar = () => {
     <Sidebar aria-label="Sidebar with content separator example" className='w-full md:w-56'>
       <Sidebar.Items>
         <Sidebar.ItemGroup className='flex flex-col sm:gap-2 gap-0'>
+        {
+                currentUser.isAdmin && 
+                <Link to={`/dashboard?tab=dash`}>
+                    <Sidebar.Item  icon={MdSpaceDashboard} as='div' active={tab === 'dash'}>
+                    Dashboard
+                    </Sidebar.Item>
+                </Link>    
+            }
             <Link to={'/dashboard?tab=profile'} >
                 <Sidebar.Item active={tab === 'profile'} icon={HiUser} label={currentUser?.isAdmin === true ? "Admin":"User"} labelColor='dark' as='div'>
                 Profile
