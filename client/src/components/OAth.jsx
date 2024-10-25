@@ -43,8 +43,8 @@ const OAth = () => {
   return (
     <Button className=""  type="button" gradientMonochrome='teal' outline
         onClick={handeGoogleClick}>
-          <FcGoogle className="my-auto mr-2 text-lg"/>
-        <p className="dark:text-gray-200">Continue with Google</p>
+          <FcGoogle className=" mr-2 text-lg"/>
+        <p className="dark:text-gray-200 text-nowrap ">Continue with Google</p>
        
     </Button>
   )
