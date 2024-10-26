@@ -41,7 +41,7 @@ const OAth = () => {
     
 
   return (
-    <Button className=""  type="button" gradientMonochrome='teal' outline
+    <Button className="min-w-[8rem]"  type="button" gradientMonochrome='teal' outline
         onClick={handeGoogleClick}>
           <FcGoogle className=" mr-2 text-lg"/>
         <p className="dark:text-gray-200 text-nowrap ">Continue with Google</p>

@@ -119,12 +119,12 @@ const SignUp = () => {
                         />
                     </div>
                     <div className='flex items-center justify-between mt-4 gap-3'>
-                        <Button color='dark' type='submit' disabled={loading}>
+                        <Button color='dark' type='submit' disabled={loading} className='min-w-[8rem]'>
                             {
                                 loading? (
                                     <>
                                     <Spinner size='sm'/> 
-                                    <span className='pl-3'>Loading....</span>
+                                    <span className='pl-3'>Loading..</span>
                                     </>
                                 ) 
                                 : <span className='flex items-center text-nowrap'>Sign Up  <GiArchiveRegister className="ml-2 h-4 w-4" /></span>
