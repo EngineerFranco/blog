@@ -14,10 +14,10 @@ const Projects = () => {
         
 
         <div className="relative z-10 max-w-2xl w-full bg-white dark:bg-gray-800 rounded-lg shadow-lg sm:mt-24 mt-10 p-20">
-          <h1 className='text-5xl font-bold text-gray-800 dark:text-white text-center -mt-5'>
+          <h1 className='text-3xl sm:text-5xl font-bold text-gray-800 dark:text-white text-center -mt-5'>
             Projects
           </h1>
-          <p className='text-lg text-gray-600 dark:text-gray-300 text-center max-w-lg mt-10'>
+          <p className='text-lg text-gray-600 dark:text-gray-300 text-center max-w-lg mt-5'>
             Build fun and engaging projects while learning backend and frontend technologies! Explore a variety of creative ideas and enhance your skills.
           </p>
           <div className="flex justify-center mt-14">

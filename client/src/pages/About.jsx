@@ -13,8 +13,8 @@ const About = () => {
       >
         <div className="absolute inset-0 bg-black opacity-40"></div>
 
-        <div className="relative z-10 max-w-5xl w-full bg-white dark:bg-gray-800 rounded-lg shadow-lg sm:mt-24 mt-10 p-10">
-          <h1 className='text-5xl font-bold text-gray-800 dark:text-white text-center mb-4'>
+        <div className="relative z-10 max-w-2xl w-full bg-white dark:bg-gray-800 rounded-lg shadow-lg sm:mt-24 mt-10 p-10">
+          <h1 className='text-3xl font-bold text-gray-800 dark:text-white text-center mb-4  sm:text-5xl'>
             About DevFranco Blog
           </h1>
           <div className='text-md text-gray-700 dark:text-gray-300 space-y-4'>

@@ -23,17 +23,20 @@ const Dashboard = () => {
   }, [location.search])
 
   return (
-    <div className='min-h-[100dvh] flex sm:flex-row flex-col'>
-      <div className='md:w-56'>
-        <DashSidebar/>
-      </div>
-        {tab === 'profile' && <DashProfile/>}
-        {tab === 'posts' && <DashPost/>}
-        {tab === 'users' && <DashUsers/>}
-        {tab === 'comments' && <DashComment/>}
-        {tab === 'dash' && <DashboardComponent/>}
+    <div className="min-h-[100dvh] flex sm:flex-row flex-col relative">
+        <div className="md:w-56 z-10">
+            <DashSidebar />
+        </div>
+        <div className="z-10 w-full">
+            {tab === 'profile' && <DashProfile />}
+            {tab === 'posts' && <DashPost />}
+            {tab === 'users' && <DashUsers />}
+            {tab === 'comments' && <DashComment />}
+            {tab === 'dash' && <DashboardComponent />}
+        </div>
     </div>
-  )
+  );
+
 }
 
 export default Dashboard
